@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/midGreen"
+    android:orientation="vertical"
+    tools:context=".ui.fragments.SearchFragment">
+
+    <TextView
+        android:id="@+id/tvNoInternetConnection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/noInternetConnectionString"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        />
+
+    <SearchView
+        android:id="@+id/svMed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="@string/svQueryHintString"
+        android:iconifiedByDefault="false"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/searchview_background"
+        android:queryBackground="@android:color/transparent"/>
+
+    <RadioGroup
+        android:id="@+id/rgMed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rB1Med"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/black"
+            android:text="@string/rbGenericNameString" />
+
+        <RadioButton
+            android:id="@+id/rB2Med"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/black"
+            android:text="@string/rbBrandNameString" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </RadioGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearchMed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"/>
+
+
+
+
+</LinearLayout>

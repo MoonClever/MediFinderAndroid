@@ -1,0 +1,40 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">MediFinderApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="noInternetConnectionString">No se detectó una conexión a internet, compruebe su conexión y vuelva a intentarlo.</string>
+    <string name="tvMed1String">First medicine to compare</string>
+    <string name="etMed1HintString" tools:ignore="Typos">Medicamento1</string>
+    <string name="rbGenericNameString">Generic Name</string>
+    <string name="rbBrandNameString">Brand Name</string>
+    <string name="tvMed2String">Second medicine to compare</string>
+    <string name="etMed2hintString">Medicamento2</string>
+    <string name="tvReactionString">Reaction to check</string>
+    <string name="sendQueryBtnString">Search coincidences</string>
+    <string name="svQueryHintString">Enter drug to search</string>
+    <string name="tvBrandNameTemplate">Brand Name</string>
+    <string name="tvGenNameTemplate">Generic name</string>
+    <string name="quantityString">Quantity: %1$d</string>
+    <string name="timeIntervalString">Time interval: %1$d hrs</string>
+    <string name="ibAddMedDescriptionString">Button to add searched drug to list</string>
+    <string name="tvRouteString">Route: %s</string>
+    <string name="tvManufacturerString">Manufacturer</string>
+
+
+    <string-array name="reactions_array">
+        <item>Hypertension</item>
+        <item>Headache</item>
+        <item>Fatigue</item>
+        <item>Palpitations</item>
+        <item>Nausea</item>
+    </string-array>
+
+    <string-array name="query_limit">
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+
+    </string-array>
+
+
+</resources>
