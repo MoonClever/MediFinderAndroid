@@ -12,9 +12,9 @@ object Constants {
 
     const val COUNT_QUERY_PARAM = "count="
 
-    const val GENERIC_NAME_QUERY_TERM = "patient.drug.openfda.generic_name:"
+    const val GENERIC_NAME_QUERY_TERM = "generic_name:"
 
-    const val BRAND_NAME_QUERY_TERM = "patient.drug.openfda.brand_name:"
+    const val BRAND_NAME_QUERY_TERM = "brand_name:"
 
     const val PATIENT_REACTION_QUERY_TERM = "patient.reaction.reactionmeddrapt.exact"
 

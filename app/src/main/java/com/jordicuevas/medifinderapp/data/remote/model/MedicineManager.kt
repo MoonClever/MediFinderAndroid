@@ -9,15 +9,18 @@ class MedicineManager {
     private var listSearchMedicine : MutableList<MedicineSearch> = emptyList<MedicineSearch>().toMutableList()
 
     fun convertSearchQueryToMedicineSearch(searchQuery : DrugLabel): List<MedicineSearch> {
+        var counter = 0
         searchQuery.results.forEach{result ->
             listSearchMedicine.add(
                 MedicineSearch(
                     result.openfda?.genericName?.get(0),
                     result.openfda?.brandName?.get(0),
                     result.openfda?.manufacturerName?.get(0),
-                    result.openfda?.route?.get(0)
+                    result.openfda?.route?.get(0),
+                    counter
             )
             )
+            counter++
         }
 
         return listSearchMedicine

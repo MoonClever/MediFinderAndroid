@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/noInternetConnectionString"
         android:textAlignment="center"
+        android:visibility="invisible"
         android:textColor="@color/black"
         />
 
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:textColor="@color/black"
-            android:text="@string/rbGenericNameString" />
+            android:text="@string/genericString" />
 
         <RadioButton
             android:id="@+id/rB2Med"
@@ -50,13 +51,18 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:textColor="@color/black"
-            android:text="@string/rbBrandNameString" />
+            android:text="@string/brandString"
+            android:checked="true"
+            />
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:minHeight="48dp"
+
+            />
 
     </RadioGroup>
 

@@ -26,6 +26,7 @@ class SearchAdapter (
 
         holder.ibAddElement.setOnClickListener{
             onAddBtnClicked(result)
+            holder.ibAddElement.setEnabled(false)
         }
 
     }

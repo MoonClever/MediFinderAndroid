@@ -18,6 +18,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/noInternetConnectionString"
         android:textSize="18sp"
+        android:visibility="invisible"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/tvMed1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,38 +56,8 @@
         app:layout_constraintTop_toBottomOf="@id/tvMed1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rgMed1" />
+        app:layout_constraintBottom_toTopOf="@id/tvMed2" />
 
-    <RadioGroup
-        android:id="@+id/rgMed1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/etMed1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/tvMed2">
-
-        <RadioButton
-            android:id="@+id/rB1Med1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/black"
-            android:text="@string/rbGenericNameString"
-            android:checked="true"/>
-
-        <RadioButton
-            android:id="@+id/rB2Med1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/black"
-            android:text="@string/rbBrandNameString" />
-    </RadioGroup>
 
     <TextView
         android:id="@+id/tvMed2"
@@ -98,7 +69,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/rgMed1"
+        app:layout_constraintTop_toBottomOf="@id/etMed1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/etMed2"/>
@@ -120,40 +91,8 @@
         app:layout_constraintTop_toBottomOf="@id/tvMed2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rgMed2" />
+        app:layout_constraintBottom_toTopOf="@id/tvReaction" />
 
-    <RadioGroup
-        android:id="@+id/rgMed2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/etMed2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvReaction">
-
-        <RadioButton
-            android:id="@+id/rB1Med2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/black"
-            android:text="@string/rbGenericNameString"
-            android:checked="true"/>
-
-        <RadioButton
-            android:id="@+id/rB2Med2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/black"
-            android:text="@string/rbBrandNameString" />
-
-    </RadioGroup>
 
     <TextView
         android:id="@+id/tvReaction"
@@ -165,7 +104,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/rgMed2"
+        app:layout_constraintTop_toBottomOf="@id/etMed2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/reactionSpinner"/>

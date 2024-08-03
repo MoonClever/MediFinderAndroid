@@ -19,6 +19,8 @@
     <string name="ibAddMedDescriptionString">Button to add searched drug to list</string>
     <string name="tvRouteString">Route: %s</string>
     <string name="tvManufacturerString">Manufacturer</string>
+    <string name="genericString">Generic</string>
+    <string name="brandString">Brand</string>
 
 
     <string-array name="reactions_array">

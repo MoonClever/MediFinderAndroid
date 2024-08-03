@@ -8,6 +8,8 @@ data class MedicineSearch(
 
     var manufacturer: String? = null,
 
-    var route: String? = null
+    var route: String? = null,
+
+    var id: Int = 0
 
 )

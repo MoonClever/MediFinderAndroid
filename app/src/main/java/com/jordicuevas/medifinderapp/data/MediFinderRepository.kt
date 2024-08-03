@@ -10,14 +10,13 @@ class MediFinderRepository (private val retrofit: Retrofit){
 
     private val mediFinderApi = retrofit.create(MediFinderApi::class.java)
 
-    fun getDrugNameLabel(nameCriteria: String?, searchTerm:String?, limitConstant: String?):
+    fun getDrugNameLabel(nameCriteria: String?, limitConstant: String?):
             Call<DrugLabel> = mediFinderApi.getDrugNameLabel(
-                nameCriteria, searchTerm, limitConstant
+                nameCriteria, limitConstant
             )
 
-    fun getReactionCountQuery(searchTerm1: String?, searchTerm2: String?, reactionSearch: String?):
+    fun getReactionCountQuery(countCriteria: String?, limitConstant: String?):
             Call<AdverseCount> = mediFinderApi.getReactionCountQuery(
-                searchTerm1, searchTerm2, reactionSearch
+                countCriteria, limitConstant
             )
-
 }
