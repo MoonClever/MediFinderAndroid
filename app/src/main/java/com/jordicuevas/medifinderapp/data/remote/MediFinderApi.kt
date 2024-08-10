@@ -17,10 +17,7 @@ interface MediFinderApi {
     ): Call<DrugLabel>
 
 
-    @GET("event.json?search=patient.drug.medicinalproduct:%22{searchTerm1}%22+AND+" +
-            "patient.drug.medicinalproduct:%22{searchTerm2}%22+AND+" +
-            "patient.reaction.reactionmeddrapt:%22{reactionSearch}%22&" +
-            "count=patient.reaction.reactionmeddrapt.exact&limit=1")
+    @GET("event.json")
     fun getReactionCountQuery(
         @Query("search")   countCriteria: String?,
         @Query("limit") limitConstant: String?

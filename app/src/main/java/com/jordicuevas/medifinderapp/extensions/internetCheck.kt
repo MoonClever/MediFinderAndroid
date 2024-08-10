@@ -1,5 +1,7 @@
 package com.jordicuevas.medifinderapp.extensions
 
+import android.app.AlertDialog
+import android.content.Context
 import com.jordicuevas.medifinderapp.utils.Constants
 import java.net.InetAddress
 import java.net.UnknownHostException
@@ -27,4 +29,24 @@ fun checkNameCriteria(int: Int): String{
 
 fun generateNameCriteria(crit: String?, search: String?): String{
     return "openfda.$crit.$search"
+}
+
+fun generateCountCriteria(crit1: String?, crit2: String?, reaction: String?): String{
+    return "patient.drug.medicinalproduct:%22$crit1%22+AND+" +
+            "patient.drug.medicinalproduct:%22$crit2%22+AND+" +
+            "patient.reaction.reactionmeddrapt:%22$reaction%22&" +
+            "count=patient.reaction.reactionmeddrapt.exact"
+}
+
+fun alertPopup(context: Context, title: String, message: String): AlertDialog {
+    val alert: AlertDialog.Builder = AlertDialog.Builder(context)
+    alert
+        .setTitle(title)
+        .setMessage(message)
+        .setNeutralButton("Ok"){ dialog, which ->
+            dialog.dismiss()
+        }
+
+    val dialog: AlertDialog = alert.create()
+    return dialog
 }

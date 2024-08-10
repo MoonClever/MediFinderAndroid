@@ -51,7 +51,7 @@ class MedicineManager {
         )
     }
 
-    fun convertCuntQueryToInt(resultCount: AdverseCount): Int?{
+    fun convertCountQueryToInt(resultCount: AdverseCount): Int?{
         return resultCount.results[0].count
     }
 

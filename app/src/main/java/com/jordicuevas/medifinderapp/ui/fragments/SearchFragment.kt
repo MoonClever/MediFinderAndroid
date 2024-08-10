@@ -18,6 +18,7 @@ import com.jordicuevas.medifinderapp.data.remote.model.ListManager
 import com.jordicuevas.medifinderapp.data.remote.model.Medicine
 import com.jordicuevas.medifinderapp.data.remote.model.MedicineDetail
 import com.jordicuevas.medifinderapp.data.remote.model.MedicineManager
+import com.jordicuevas.medifinderapp.data.remote.model.MedicineSearch
 import com.jordicuevas.medifinderapp.data.remote.model.drug.DrugLabel
 import com.jordicuevas.medifinderapp.databinding.FragmentSearchBinding
 import com.jordicuevas.medifinderapp.extensions.checkNameCriteria
@@ -92,8 +93,10 @@ class SearchFragment : Fragment() {
                             Log.d(Constants.LOGTAG, "Query realizado")
 
                             response.body()?.let { drugs ->
+
                                 binding.rvSearchMed.apply {
                                     layoutManager = LinearLayoutManager(requireContext())
+                                    adapter = SearchAdapter(emptyList<MedicineSearch>().toMutableList()){}
                                     adapter = SearchAdapter(medManager.convertSearchQueryToMedicineSearch(drugs)) { drug ->
                                         var dataManager = ListManager(requireContext())
                                         dataManager.createElementList(medManager.convertQueryToListElement(drugs.results.get(drug.id)))
