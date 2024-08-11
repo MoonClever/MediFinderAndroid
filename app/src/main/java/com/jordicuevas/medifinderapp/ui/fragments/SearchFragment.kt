@@ -15,6 +15,7 @@ import com.jordicuevas.medifinderapp.R
 import com.jordicuevas.medifinderapp.application.MediFinderRFApp
 import com.jordicuevas.medifinderapp.data.MediFinderRepository
 import com.jordicuevas.medifinderapp.data.remote.model.ListManager
+import com.jordicuevas.medifinderapp.data.remote.model.LocalStorage.manager
 import com.jordicuevas.medifinderapp.data.remote.model.Medicine
 import com.jordicuevas.medifinderapp.data.remote.model.MedicineDetail
 import com.jordicuevas.medifinderapp.data.remote.model.MedicineManager
@@ -98,9 +99,8 @@ class SearchFragment : Fragment() {
                                     layoutManager = LinearLayoutManager(requireContext())
                                     adapter = SearchAdapter(emptyList<MedicineSearch>().toMutableList()){}
                                     adapter = SearchAdapter(medManager.convertSearchQueryToMedicineSearch(drugs)) { drug ->
-                                        var dataManager = ListManager(requireContext())
-                                        dataManager.createElementList(medManager.convertQueryToListElement(drugs.results.get(drug.id)))
-                                        dataManager.createElementDetail(medManager.convertQueryToListDetail(drugs.results.get(drug.id)))
+                                        manager.createElementList(medManager.convertQueryToListElement(drugs.results.get(drug.id)))
+                                        manager.createElementDetail(medManager.convertQueryToListDetail(drugs.results.get(drug.id).openfda))
                                         Toast.makeText(
                                             requireContext(),
                                             "Elemento Agregado",

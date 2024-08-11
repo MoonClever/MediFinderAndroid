@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.jordicuevas.medifinderapp.R
+import com.jordicuevas.medifinderapp.data.remote.model.ListManager
+import com.jordicuevas.medifinderapp.data.remote.model.LocalStorage.manager
 import com.jordicuevas.medifinderapp.databinding.ActivityMainBinding
 import com.jordicuevas.medifinderapp.ui.adapter.TabPageAdapter
 
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        manager = ListManager(this)
         setUpTabBar()
     }
 

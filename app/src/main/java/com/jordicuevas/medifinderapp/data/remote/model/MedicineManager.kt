@@ -2,6 +2,7 @@ package com.jordicuevas.medifinderapp.data.remote.model
 
 import com.jordicuevas.medifinderapp.data.remote.model.adverse.AdverseCount
 import com.jordicuevas.medifinderapp.data.remote.model.drug.DrugLabel
+import com.jordicuevas.medifinderapp.data.remote.model.drug.Openfda
 import com.jordicuevas.medifinderapp.data.remote.model.drug.Results
 
 class MedicineManager {
@@ -36,18 +37,13 @@ class MedicineManager {
         )
     }
 
-    fun convertQueryToListDetail(resultAdd : Results): MedicineDetail {
+    fun convertQueryToListDetail(resultAdd : Openfda): MedicineDetail {
         return MedicineDetail(
             0,
             0,
-            resultAdd.openfda?.genericName?.get(0),
-            resultAdd.openfda?.brandName?.get(0),
-            resultAdd.openfda?.route?.get(0),
-            resultAdd.activeIngredient.get(0),
-            resultAdd.purpose.get(0),
+            resultAdd,
             null,
-            resultAdd.indicationsAndUsage.get(0),
-            resultAdd.doNotUse.get(0)
+
         )
     }
 
