@@ -14,6 +14,7 @@ Ya que la app tiene un fin relacionado a la salud, se consideró que la versión
 
 ## Credenciales para poder acceder al app (si se requieren)
 No se necesitan credenciales para acceder y usar la app, pero la API cuenta con una restricción de 1000 peticiones por día, por lo que para fines del proyecto se redujo el límite de resultados obtenidos.
+Como la api esta en ingles, se recomienda usar productos vendidos en EEUU o en su defecto el nombre genérico en inglés
 
 ## Dependencias del proyecto (paquetes y/o frameworks utilizados)
 Se utilizaron las librerías de Retrofit, Gson, además de Lifecycle.runtime y logging.interceptor.
