@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import com.jordicuevas.medifinderapp.R
 import com.jordicuevas.medifinderapp.data.remote.model.ListManager
+import com.jordicuevas.medifinderapp.data.remote.model.LocalStorage.manager
 import com.jordicuevas.medifinderapp.databinding.FragmentMedListBinding
 
 
@@ -25,24 +26,23 @@ class MedListFragment : Fragment() {
     ): View? {
         _binding = FragmentMedListBinding.inflate(inflater, container, false)
 
-        var listManager = ListManager(requireContext())
-
         binding.rvListMed.apply{
             layoutManager = LinearLayoutManager(requireContext())
             adapter = com.jordicuevas.medifinderapp.ui.adapter.ListAdapter(
-                listManager.readList(),
-                listManager.readDetails()
+                manager.readList(),
+                manager.readDetails()
             ) { details ->
 
-                //Mostrar detalles de vista
-
-//                requireActivity().supportFragmentManager.beginTransaction()
+                ///////Este codigo no funciona con viewpager2, requiero investiga que otra alternativa tengo para mostrar los detalles
+//                parentFragmentManager.beginTransaction()
 //                    .replace(
-//                        R.id.fragment_container,
-//                        MedListDetailFragment.newInstance(perro.idPerro.toString())
+//                        R.id.viewPager,
+//                        MedListDetailFragment()
 //                    )
 //                    .addToBackStack(null)
 //                    .commit()
+
+
             }
         }
 
