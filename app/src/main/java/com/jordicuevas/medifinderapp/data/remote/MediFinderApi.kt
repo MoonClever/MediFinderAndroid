@@ -19,7 +19,8 @@ interface MediFinderApi {
 
     @GET("event.json")
     fun getReactionCountQuery(
-        @Query("search")   countCriteria: String?,
+        @Query("search", encoded = true)   countCriteria: String?,
+        @Query("count") countKey: String?,
         @Query("limit") limitConstant: String?
     ): Call<AdverseCount>
 

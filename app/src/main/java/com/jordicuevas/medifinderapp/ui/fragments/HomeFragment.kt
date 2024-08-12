@@ -21,8 +21,11 @@ import com.jordicuevas.medifinderapp.databinding.FragmentHomeBinding
 import com.jordicuevas.medifinderapp.extensions.checkNameCriteria
 import com.jordicuevas.medifinderapp.extensions.generateCountCriteria
 import com.jordicuevas.medifinderapp.extensions.generateNameCriteria
+import com.jordicuevas.medifinderapp.extensions.isInternetAvailable
+import com.jordicuevas.medifinderapp.extensions.snackPop
 import com.jordicuevas.medifinderapp.ui.adapter.SearchAdapter
 import com.jordicuevas.medifinderapp.utils.Constants
+import com.jordicuevas.medifinderapp.utils.Constants.PATIENT_REACTION_QUERY_TERM
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -71,49 +74,63 @@ class HomeFragment : Fragment() {
         repository = (requireActivity().application as MediFinderRFApp).repository
 
         binding.sendQueryBtn.setOnClickListener {
-            lifecycleScope.launch {
-                val call: Call<AdverseCount> = repository.getReactionCountQuery(
-                    generateCountCriteria(binding.etMed1.text.toString(),
-                    binding.etMed2.text.toString(),
-                    binding.reactionSpinner.selectedItem.toString()),
-                        "1")
+            if(isInternetAvailable(requireContext())){
+                if(binding.etMed1.text.toString().isEmpty() || binding.etMed2.text.toString().isEmpty()){
+                    snackPop(view, "Rellene los campos correspondientes").show()
+                }
+                else{
+                    lifecycleScope.launch {
+                        val call: Call<AdverseCount> = repository.getReactionCountQuery(
+                            generateCountCriteria(binding.etMed1.text.toString(),
+                                binding.etMed2.text.toString(),
+                                binding.reactionSpinner.selectedItem.toString()),
+                            PATIENT_REACTION_QUERY_TERM,
+                            "1")
 
-                Log.d(Constants.LOGTAG, generateCountCriteria(binding.etMed1.text.toString(),
-                    binding.etMed2.text.toString(),
-                    binding.reactionSpinner.selectedItem.toString()))
+                        Log.d(Constants.LOGTAG, generateCountCriteria(binding.etMed1.text.toString(),
+                            binding.etMed2.text.toString(),
+                            binding.reactionSpinner.selectedItem.toString()))
 
-                call.enqueue(object : Callback<AdverseCount> {
-                    override fun onResponse(
-                        p0: Call<AdverseCount>,
-                        response: Response<AdverseCount>
-                    ) {
+                        call.enqueue(object : Callback<AdverseCount> {
+                            override fun onResponse(
+                                p0: Call<AdverseCount>,
+                                response: Response<AdverseCount>
+                            ) {
 
-                        binding.tvNoInternetConnection.visibility = View.INVISIBLE
+                                binding.tvNoInternetConnection.visibility = View.INVISIBLE
 
-                        Log.d(Constants.LOGTAG, "Query realizado")
+                                if(response.code() == 404){
+                                    binding.tvResults.text = ""
+                                    snackPop(view, "No se encontraron resultados").show()
+                                }
 
-
-                        response.body()?.let { count ->
-                                //Log.d(Constants.LOGTAG, medManager.convertCountQueryToInt(count).toString())
-                                val countQuery = medManager.convertCountQueryToInt(count)
-                                binding.tvResults.text = "Coincidencias encontradas: .$countQuery"
+                                response.body()?.let { count ->
+                                    //Log.d(Constants.LOGTAG, medManager.convertCountQueryToInt(count).toString())
+                                    val countQuery = medManager.convertCountQueryToInt(count)
+                                    snackPop(view, "Query Realizado").show()
+                                    binding.tvResults.text = "Coincidencias encontradas: $countQuery"
+                                }
                             }
-                        }
 
 
-                    override fun onFailure(p0: Call<AdverseCount>, error: Throwable) {
-                        //Manejo del error
-                        binding.tvNoInternetConnection.visibility = View.VISIBLE
+                            override fun onFailure(p0: Call<AdverseCount>, error: Throwable) {
+                                //Manejo del error
+                                binding.tvNoInternetConnection.visibility = View.VISIBLE
 
-                        Toast.makeText(
-                            requireContext(),
-                            "Error al hacer query",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                                snackPop(view, "Error al hacer query").show()
+                            }
+
+                        })
                     }
 
-                })
+                }
+
             }
+            else{
+                snackPop(view, "No hay conexion a internet, intente más tarde").show()
+            }
+
+
         }
 
 

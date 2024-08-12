@@ -24,6 +24,8 @@ import com.jordicuevas.medifinderapp.data.remote.model.drug.DrugLabel
 import com.jordicuevas.medifinderapp.databinding.FragmentSearchBinding
 import com.jordicuevas.medifinderapp.extensions.checkNameCriteria
 import com.jordicuevas.medifinderapp.extensions.generateNameCriteria
+import com.jordicuevas.medifinderapp.extensions.isInternetAvailable
+import com.jordicuevas.medifinderapp.extensions.snackPop
 import com.jordicuevas.medifinderapp.ui.adapter.SearchAdapter
 import com.jordicuevas.medifinderapp.utils.Constants
 import kotlinx.coroutines.launch
@@ -78,51 +80,62 @@ class SearchFragment : Fragment() {
                 binding.svMed.clearFocus()
                 //binding.tvNoInternetConnection.text = checkNameCriteria(binding.rgMed.checkedRadioButtonId) + query + binding.spinner.selectedItem.toString()
 
-                lifecycleScope.launch {
-                    val call: Call<DrugLabel> = repository.getDrugNameLabel(
-                        generateNameCriteria(checkNameCriteria(binding.rgMed.checkedRadioButtonId), query) ,
-                        binding.spinner.selectedItem.toString())
+                if (isInternetAvailable(requireContext())){
+                    lifecycleScope.launch {
+                        val call: Call<DrugLabel> = repository.getDrugNameLabel(
+                            generateNameCriteria(checkNameCriteria(binding.rB1Med.isChecked), query) ,
+                            binding.spinner.selectedItem.toString())
 
-                    call.enqueue(object : Callback<DrugLabel> {
-                        override fun onResponse(
-                            p0: Call<DrugLabel>,
-                            response: Response<DrugLabel>
-                        ) {
+                        call.enqueue(object : Callback<DrugLabel> {
+                            override fun onResponse(
+                                p0: Call<DrugLabel>,
+                                response: Response<DrugLabel>
+                            ) {
 
-                            binding.tvNoInternetConnection.visibility = View.INVISIBLE
+                                binding.tvNoInternetConnection.visibility = View.INVISIBLE
 
-                            Log.d(Constants.LOGTAG, "Query realizado")
+                                if(response.code() == 404){
+                                    snackPop(view, "No se encontraron resultados").show()
+                                }
 
-                            response.body()?.let { drugs ->
-
-                                binding.rvSearchMed.apply {
-                                    layoutManager = LinearLayoutManager(requireContext())
-                                    adapter = SearchAdapter(emptyList<MedicineSearch>().toMutableList()){}
-                                    adapter = SearchAdapter(medManager.convertSearchQueryToMedicineSearch(drugs)) { drug ->
-                                        manager.createElementList(medManager.convertQueryToListElement(drugs.results.get(drug.id)))
-                                        manager.createElementDetail(medManager.convertQueryToListDetail(drugs.results.get(drug.id).openfda))
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "Elemento Agregado",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
+                                response.body()?.let { drugs ->
+                                    print(drugs.results)
+                                    binding.rvSearchMed.apply {
+                                        layoutManager = LinearLayoutManager(requireContext())
+                                        adapter = SearchAdapter(
+                                            medManager.convertSearchQueryToMedicineSearch(drugs)
+                                        ) { drug ->
+                                            manager.createElementList(
+                                                medManager.convertQueryToListElement(
+                                                    drugs.results.get(drug.id)
+                                                )
+                                            )
+                                            manager.createElementDetail(
+                                                medManager.convertQueryToListDetail(
+                                                    drugs.results.get(drug.id)
+                                                )
+                                            )
+                                            snackPop(
+                                                view,
+                                                "Elemento agregado exitosamente"
+                                            ).show()
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        override fun onFailure(p0: Call<DrugLabel>, error: Throwable) {
-                            //Manejo del error
-                            binding.tvNoInternetConnection.visibility = View.VISIBLE
+                            override fun onFailure(p0: Call<DrugLabel>, error: Throwable) {
+                                //Manejo del error
+                                binding.tvNoInternetConnection.visibility = View.VISIBLE
 
-                            Toast.makeText(
-                                requireContext(),
-                                "Error al hacer query",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                                snackPop(view, "Error al hacer query").show()
+                            }
 
-                    })
+                        })
+                    }
+                }
+                else{
+                    snackPop(view, "No hay conexión a internet, intente de nuevo").show()
                 }
                 return false
             }
